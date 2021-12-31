@@ -1,4 +1,4 @@
-# GNULinux 🐧
+# GNULinux dotfiles 🐧
 
 This repository contains all my GNU+Linux configuration files.
 
