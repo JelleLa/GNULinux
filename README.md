@@ -1,4 +1,4 @@
-# Linux 🐧
+# GNULinux 🐧
 
 This repository contains all my GNU+Linux configuration files.
 
