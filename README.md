@@ -1,6 +1,6 @@
 # GNULinux dotfiles 🐧
 
-This repository contains all my GNU+Linux configuration files.
+This repository contains all my GNU+Linux configuration files. All the code is available under the "Unlicense" license.
 
 ![2021-12-27-225137_1920x1080_scrot](https://user-images.githubusercontent.com/60575963/147570626-9bbdbecd-3d32-44b4-bc7e-80c2122207e3.png)
 
