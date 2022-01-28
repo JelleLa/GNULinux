@@ -7,7 +7,7 @@
 f=3
 b=4
 
-echo -----------------------------------------------------------
+echo ---------------------------------------------------------
 echo Welcome $(whoami)! It is $(date +%a) $(date +%x)
 echo The weather in $(curl --silent wttr.in/Eindhoven?format=4)
 
@@ -29,5 +29,5 @@ cat << EOF
  $bld$fbright1█████ $fbright2█████ $fbright3█████ $fbright4█████ $fbright5█████ $fbright6█████
  $rst
 EOF
-echo -----------------------------------------------------------
+echo ---------------------------------------------------------
 
