@@ -1,5 +1,6 @@
 \documentclass[leqno]{article}
 \usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
 
 \title{TITLE}
 \author{AUTHOR}

@@ -122,5 +122,13 @@ case "$?" in
     1)  ;;
 esac
 
+## JUPYTER DIALOG
+
+dialog --title "openSUSE Setup Script" --yesno "Install and Setup Jupyter?" 10 40
+
+case "$?" in
+    0)  sudo pip3 install jupyter jupyter themes && jt -t monokai ;;
+    1)  ;;
+esac
 ## END DIALOG
  dialog --title "openSUSE Setup Script" --infobox "Script is done! Redirected to the shell." 10 40
