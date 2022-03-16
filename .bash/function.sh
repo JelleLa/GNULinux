@@ -69,6 +69,18 @@ function extract () {
    fi
  }
 
+
+#----------------------------------------
+# -| LISP (Over SBCL/COMMON LISP) |-
+
+function lisp () {
+    if [ -z "$1" ]; then
+        sbcl
+    else
+        sbcl --script $1
+    fi
+}
+
 #----------------------------------------
 # -| nnn ADVANCED FILE OPENER (WIP) |-
 
