@@ -1,4 +1,4 @@
-\begin{figure}
+\begin{figure}[H]
     \centering
     \includegraphics[width=1\textwidth]{}
     \caption{Caption}
