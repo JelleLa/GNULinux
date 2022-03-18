@@ -66,6 +66,7 @@ highlight CursorLineNr ctermfg=white cterm=BOLD
 command LoadTex         :0r $HOME/.vim/templates/latex
 command LoadPython      :0r $HOME/.vim/templates/python
 command LoadBash        :0r $HOME/.vim/templates/bash
+command LoadLISP        :0r $HOME/.vim/templates/lisp
 " COMPILING
 command CompTex2Pdf     !clear && pdflatex % && zathura %:r.pdf
 command CompMd2Pdf      !clear && pandoc -s % -o %:r.pdf && zathura %:r.pdf
@@ -114,7 +115,7 @@ autocmd FileType md,markdown inoremap <C-b>     ****<Esc>2hli
 autocmd FileType md,markdown inoremap <C-i>     __<Esc>hli
 autocmd filetype md,markdown inoremap <C-t>     ``<esc>hli
 autocmd filetype md,markdown inoremap <C-s>     #<Space>
-autocmd FileType md,markdown inoremap ;eq       $$<CR><CR>$$<>ki<Tab>
+autocmd FileType md,markdown inoremap ;eq       $$<CR><CR>$$<Esc>ki<Tab>
 autocmd FileType md,markdown inoremap ;fig      ![Caption\label{fig:figure}]()<Esc>1hli
 autocmd FileType md,markdown inoremap $         $$<Esc>1hli
 autocmd FileType md,markdown nnoremap <S-c>     <Esc>:CompMd2Pdf<CR>
@@ -122,5 +123,8 @@ autocmd FileType md,markdown nnoremap <S-b>     <Esc>:CompMd2Beamer<CR>
 autocmd FileType md,markdown nnoremap <C-s>     <Esc>:setlocal spell spelllang=en_us<CR>
 autocmd FileType python inoremap ;def def method(args) -> None :<CR><Tab>
 autocmd FileType python inoremap ;class class cl(args) -> None:<CR><Tab>def _init_(args) -> None:<CR><Tab><Tab>
-
+" LISP
+autocmd FileType lisp,clisp inoremap <CR>   <CR>()<Esc>1hli
+autocmd FileType lisp,clisp inoremap '      '()<Esc>1hli
+autocmd FileType lisp,clisp inoremap ;      ;;
 
