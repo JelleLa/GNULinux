@@ -1,4 +1,4 @@
-# GNULinux dotfiles 🐧
+# GNU+Linux dotfiles 🐧
 
 This repository contains all my GNU+Linux configuration files. All the code is available under the "Unlicense" license.
 
