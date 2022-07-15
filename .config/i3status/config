@@ -1,0 +1,26 @@
+general {
+    colors                  = true
+    color_good              = "#a3be8c"
+    color_degraded          = "#ebcb8b"
+    color_bad               = "#bf616a"
+    interval                = 1
+    separator               = "|"
+}
+
+order += "disk /"
+order += "memory"
+order += "time"
+
+disk "/" {
+    format = "Storage: %avail/ %total"
+}
+
+memory {
+  memory_used_method = classical
+  format="Memory: %used/%total"
+}
+
+
+time {
+  format="%d/%m/%y %H:%M:%S"
+}

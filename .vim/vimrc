@@ -1,15 +1,9 @@
-"============================================================================
-"
-"	  ██╗   ██╗██╗███╗   ███╗██████╗  ██████╗
-"	  ██║   ██║██║████╗ ████║██╔══██╗██╔════╝
-"	  ██║   ██║██║██╔████╔██║██████╔╝██║
-"	  ╚██╗ ██╔╝██║██║╚██╔╝██║██╔══██╗██║
-"	██╗╚████╔╝ ██║██║ ╚═╝ ██║██║  ██║╚██████╗
-"	╚═╝ ╚═══╝  ╚═╝╚═╝     ╚═╝╚═╝  ╚═╝ ╚═════╝
-"
-"============================================================================
-" ~~ BASICS ~~
-"============================================================================
+"========================================
+" <> vimrc <>
+"========================================
+"----------------------------------------
+" -| BASIC SETTINGS |-
+
 " LINE NUMBERS
 set number relativenumber
 " SYNTAX
@@ -23,9 +17,10 @@ set linebreak
 set ruler
 " STATUS BAR
 set laststatus=2
-"============================================================================
-" ~~ ADVANCED ~~
-"============================================================================
+
+"----------------------------------------
+" -| ADVANCED SETTINGS |-
+
 " COMMAND-LINE COMPLETION
 set wildmenu
 " UNDO LIMIT
@@ -51,17 +46,19 @@ set cursorline
 set path+=**
 " AUTODELETE TRAILING WHITESPACE
 autocmd BufWritePre * %s/\s\+$//e
-"============================================================================
-" ~~ THEME ~~
-"============================================================================
-" SET COLOR THEME
+
+"----------------------------------------
+" -| LOOK AND FEEL |-
+
+" SET THEME
 color abstract
 " WHITE LINE NUMBERS (CAN BE OVERWRITTEN BY ':colorscheme')
 highlight LineNr ctermfg=white cterm=ITALIC
 highlight CursorLineNr ctermfg=white cterm=BOLD
-"============================================================================
-" ~~ COMMANDS ~~
-"============================================================================
+
+"----------------------------------------
+" -| COMMANDS |-
+
 " TEMPLATES
 command LoadTex         :0r $HOME/.vim/templates/latex
 command LoadPython      :0r $HOME/.vim/templates/python
@@ -75,9 +72,11 @@ command CompMd2Beamer   !clear && pandoc -t beamer % -o %:r.pdf && zathura %:r.p
 command RunPython       !clear && python3 %
 command RunMATLAB       !matlab %
 command RunOctave       !octave %
-"============================================================================
-" ~~ KEYBINDINGS ~~
-"============================================================================
+command RunLISP         !sbcl --script %
+
+"----------------------------------------
+" -| KEYBINDINGS |-
+
 " GLOBAL YANKING, DELETING  AND PASTING
 nnoremap <C-y> "+y
 nnoremap <C-d> "+d

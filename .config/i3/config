@@ -10,21 +10,27 @@ set $defaultmod Mod4
 set $super Mod4
 
 # Workspace variables
-set $ws1 "1"
-set $ws2 "2"
-set $ws3 "3"
-set $ws4 "4"
-set $ws5 "5"
-set $ws6 "6"
-set $ws7 "7"
-set $ws8 "8"
-set $ws9 "9"
-set $ws10 "10"
+set $ws1    "1:Ⅰ"
+set $ws2    "2:Ⅱ"
+set $ws3    "3:Ⅲ"
+set $ws4    "4:Ⅳ"
+set $ws5    "5:Ⅴ"
+set $ws6    "6:Ⅵ"
+set $ws7    "7:Ⅶ"
+set $ws8    "8:Ⅷ"
+set $ws9    "9:Ⅸ"
+set $ws10   "10:Ⅹ"
 
 # Color variables
-set $dgrey "#20111B"	# Dark Grey
-set $lbrown "#a2742b"	# Light Brown
-set $black "#000000" 	# Black
+set $black      #000000
+set $grey       #888888
+set $white      #ffffff
+
+set $ws_bg      #e4cfff
+set $ws_edge    #e4cfff
+set $ws_urgent  #e79a9a
+set $ws_mode    #b7e79a
+set $ws_unf     #333333
 
 # Keyboard variables
 set $up Up
@@ -32,7 +38,8 @@ set $down Down
 set $left Left
 set $right Right
 
-set $term kitty
+# Terminal variable
+set $term kitty --single-instance
 
 #----------------------------------------
 # -| FONT SETTINGS |-
@@ -67,7 +74,8 @@ gaps outer 0
 # Applications
 bindsym $super+Return exec $term
 bindsym $super+Shift+s exec i3lock --color=$black
-bindsym $super+s exec i3-dmenu-desktop
+#bindsym $super+s exec i3-dmenu-desktop
+bindsym $super+s exec dmenu_run -b -nb '$black' -sf '$black' -sb '$ws_bg' -nf '$white' -fn 'Firacode Bold 15'
 bindsym $super+Control+Left workspace next
 bindsym $super+Control+Right workspace next
 
@@ -82,7 +90,6 @@ bindsym XF86AudioMute exec --no-startup-id amixer -D pulse sset Master toggle-mu
 
 # Sreenshot
 bindsym Print exec scrot $HOME/Screenshots/%Y-%m-%d-%T-screenshot.png
-#bindsym Control-Print exec scrot $HOME/Screenshots/%Y-%m-%d-%T-screenshot.png --select --line mode=edge
 
 
 # Webcam
@@ -163,11 +170,35 @@ exec --no-startup-id /usr/lib64/polkit-gnome/polkit-gnome-authentication-agent-1
 exec nitrogen --restore &
 exec_always picom --config ~/.config/picom/picom.conf
 exec_always picom
-exec $term -e sudo .bash/startup.sh
+exec $term -e sudo bash .bash/startup.sh
 exec_always --no-startup-id mpd
 
 #----------------------------------------
-# -| RESIZE |-
+# -| I3BAR |-
+
+bar {
+    mode dock
+    status_command i3status
+    position top
+    font pango: Firacode Bold 10
+    separator_symbol "||"
+    strip_workspace_numbers yes
+    binding_mode_indicator yes
+    colors {
+        background #000000
+        statusline #ffffff
+        separator #666666
+#                          FG           EDGE        TEXT
+        focused_workspace  $ws_bg       $ws_edge    #000000
+        active_workspace   $ws_unf      $ws_unf     #888888
+        inactive_workspace $ws_unf      $ws_unf     #888888
+        urgent_workspace   $ws_urgent   $ws_urgent  #888888
+        binding_mode       $ws_mode     $ws_mode    #000000
+    }
+}
+
+#----------------------------------------
+# -| RESIZE MODE |-
 
 mode "resize" {
         # These bindings trigger as soon as you enter the resize mode
@@ -189,7 +220,7 @@ mode "resize" {
         # back to normal: Enter or Escape or Mod4+r
         bindsym Return mode "default"
         bindsym Escape mode "default"
-        bindsym Mod4+r mode "default"
+        bindsym $super+r mode "default"
 }
-bindsym $super+Control+r mode "resize"
+bindsym $super+r mode "resize"
 #----------------------------------------
