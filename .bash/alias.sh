@@ -17,7 +17,7 @@ alias pdf='zathura'
 alias audio-list='pactl list short sinks'
 alias nc='nextcloud'
 alias startup='$HOME/.bash/STARTUP.sh'
-
+alias ip="hostname -I"
 #----------------------------------------
 # -| LISTING/EXA THINGS |-
 

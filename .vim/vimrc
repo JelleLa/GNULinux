@@ -4,46 +4,64 @@
 "----------------------------------------
 " -| BASIC SETTINGS |-
 
+
 " LINE NUMBERS
 set number relativenumber
+
 " SYNTAX
 syntax on
+
 " ENCODING SETTINGS
 scriptencoding utf-8
 set encoding=utf-8
+
 " NO LINE BREAKS IN WORDS
 set linebreak
+
 " CURSOR ALWAYS VISIBLE
 set ruler
+
 " STATUS BAR
 set laststatus=2
+
+" CLIPBOARD
+set clipboard=unnamedplus
 
 "----------------------------------------
 " -| ADVANCED SETTINGS |-
 
 " COMMAND-LINE COMPLETION
 set wildmenu
+
 " UNDO LIMIT
 set history=1000
+
 " EXIT CONFIRM DIALOG (INSTEAD OF FAILING A COMMAND)
 set confirm
+
 " DISABLE Vi COMPATIBILITY
 set nocompatible
+
 " DISABLE BACKUP FILES GENERATION (~ - files)
 set nobackup
+
 " SET WINDOW TITLE
 set title
+
 " SHOW EXISTING TAB WITH 4 SPACES WIDTH
 set tabstop=4
+
 " WHEN INDENTING WITH '>', USE 4 SPACES WIDTH
 set shiftwidth=4
-" ON PRESSING TAB, INSERT 4 SPACES
-set expandtab
+
 " SET CURSOR INDICATOR
-set cursorcolumn
-set cursorline
+" set	cursorcolumn
+" set	cursorline
+
+
 " FUZZY FIND (ADD ** TO SEARCH PATH)
 set path+=**
+
 " AUTODELETE TRAILING WHITESPACE
 autocmd BufWritePre * %s/\s\+$//e
 
@@ -52,27 +70,48 @@ autocmd BufWritePre * %s/\s\+$//e
 
 " SET THEME
 color abstract
+
 " WHITE LINE NUMBERS (CAN BE OVERWRITTEN BY ':colorscheme')
 highlight LineNr ctermfg=white cterm=ITALIC
 highlight CursorLineNr ctermfg=white cterm=BOLD
+
+"TAB/SPACE INDICATION
+noremap <space><space> :set invlist<CR>
+hi SpecialKey ctermfg=Red ctermbg=NONE
+set lcs+=space:·
+set lcs+=tab:››
+set lcs+=eol:¶
 
 "----------------------------------------
 " -| COMMANDS |-
 
 " TEMPLATES
-command LoadTex         :0r $HOME/.vim/templates/latex
-command LoadPython      :0r $HOME/.vim/templates/python
-command LoadBash        :0r $HOME/.vim/templates/bash
-command LoadLISP        :0r $HOME/.vim/templates/lisp
-" COMPILING
-command CompTex2Pdf     !clear && pdflatex % && zathura %:r.pdf
-command CompMd2Pdf      !clear && pandoc -s % -o %:r.pdf && zathura %:r.pdf
-command CompMd2Beamer   !clear && pandoc -t beamer % -o %:r.pdf && zathura %:r.pdf
+command LoadTex		:0r $HOME/.vim/templates/latex
+command LoadPython	:0r $HOME/.vim/templates/python
+command LoadBash	:0r $HOME/.vim/templates/bash
+command LoadLISP	:0r $HOME/.vim/templates/lisp
+
+" INSERT
+command InrtBlock		:0r $HOME/.vim/templates/md_block
+command InrtAlertBlock	:0r $HOME/.vim/templates/md_alertblock
+
+" COMPILING (OLD, LEFT IN AS FALLBACK)
+command CompTex2Pdf		!clear && pdflatex % && zathura %:r.pdf
+command CompLuaTex2Pdf	!clear && lualatex % && zathura %:r.pdf
+command CompMd2Pdf		!clear && pandoc -s % -o %:r.pdf && zathura %:r.pdf
+command CompMd2Beamer	!clear && pandoc -t beamer % -o %:r.pdf && zathura %:r.pdf
+
+" COMPILING (OLD, LEFT IN AS FALLBACK)
+command Compile		!clear && $HOME/.vim/scripts/compile.sh %
+
+" CONVERT
+command ConvTex2Md	!clear && pandoc -s % -o %:r.md
+
 " RUNNING
-command RunPython       !clear && python3 %
-command RunMATLAB       !matlab %
-command RunOctave       !octave %
-command RunLISP         !sbcl --script %
+command RunPython	!clear && python3 %
+command RunMATLAB	!matlab %
+command RunOctave	!octave %
+command RunLISP		!sbcl --script %
 
 "----------------------------------------
 " -| KEYBINDINGS |-
@@ -81,17 +120,23 @@ command RunLISP         !sbcl --script %
 nnoremap <C-y> "+y
 nnoremap <C-d> "+d
 nnoremap <C-p> "+P
+
 " TAB NAVIAGTION
 nnoremap <Tab> :tabnext<CR>
 nnoremap <C-t> :tabe $HOME/
+
 " SET ; TO :
 nnoremap ; :
-" SET Q TO :Q!
+
+" SET Q TO :q!
 nnoremap <S-q> :q!<CR>
+
 " CLOSING OPEN BRACKETS
 inoremap [ []<Esc>1hli
 inoremap ( ()<Esc>1hli
 inoremap { {}<Esc>1hli
+autocmd FileType html inoremap <   <> </><Esc>4hli
+
 " LATEX
 autocmd FileType tex,latex inoremap <C-b>   \textbf{}<Esc>hli
 autocmd FileType tex,latex inoremap <C-i>   \textit{}<Esc>hli
@@ -107,23 +152,28 @@ autocmd FileType tex,latex inoremap ;en     \begin{enumerate}<CR><Tab>\item<CR>\
 autocmd FileType tex,latex inoremap ;fig    <Esc>:r $HOME/.vim/templates/latexfigure<CR>2j/}<CR>i
 autocmd FileType tex,latex inoremap ;up     <Esc>:2r $HOME/.vim/templates/usepackage<CR>/%%END%%<CR>7xi
 autocmd FileType tex,latex inoremap $       $$<Esc>1hli
+autocmd FileType tex,latex inoremap ;bg     \begin{}<CR>\end{}
 autocmd FileType tex,latex nnoremap <S-c>   <Esc>:CompTex2Pdf<CR>
 autocmd FileType tex,latex nnoremap <C-s>   <Esc>:setlocal spell spelllang=en_us<CR>
+
 " MARKDOWN
-autocmd FileType md,markdown inoremap <C-b>     ****<Esc>2hli
-autocmd FileType md,markdown inoremap <C-i>     __<Esc>hli
-autocmd filetype md,markdown inoremap <C-t>     ``<esc>hli
-autocmd filetype md,markdown inoremap <C-s>     #<Space>
-autocmd FileType md,markdown inoremap ;eq       $$<CR><CR>$$<Esc>ki<Tab>
-autocmd FileType md,markdown inoremap ;fig      ![Caption\label{fig:figure}]()<Esc>1hli
-autocmd FileType md,markdown inoremap $         $$<Esc>1hli
-autocmd FileType md,markdown nnoremap <S-c>     <Esc>:CompMd2Pdf<CR>
-autocmd FileType md,markdown nnoremap <S-b>     <Esc>:CompMd2Beamer<CR>
-autocmd FileType md,markdown nnoremap <C-s>     <Esc>:setlocal spell spelllang=en_us<CR>
-autocmd FileType python inoremap ;def def method(args) -> None :<CR><Tab>
-autocmd FileType python inoremap ;class class cl(args) -> None:<CR><Tab>def _init_(args) -> None:<CR><Tab><Tab>
+autocmd FileType md,markdown inoremap <C-b>		****<Esc>2hli
+autocmd filetype md,markdown inoremap <C-t>		``<esc>hli
+autocmd filetype md,markdown inoremap <C-s>		#<Space>
+autocmd FileType md,markdown inoremap ;l		[]()<Esc>3hli
+autocmd FileType md,markdown inoremap ;eq		$$<CR><CR>$$<Esc>ki<Tab>
+autocmd FileType md,markdown inoremap ;fig		![Caption\label{fig:figure}]()<Esc>1hli
+autocmd FileType md,markdown inoremap $			$$<Esc>1hli
+autocmd FileType md,markdown nnoremap <S-c>		<Esc>:CompMd2Pdf<CR>
+autocmd FileType md,markdown nnoremap <S-b>		<Esc>:CompMd2Beamer<CR>
+autocmd FileType md,markdown nnoremap <C-s>		<Esc>:setlocal spell spelllang=en_us<CR>
+
+" PYTHON
+autocmd FileType python inoremap	;def def method(args) -> None :<CR><Tab>
+autocmd FileType python inoremap	;class class cl(args) -> None:<CR><Tab>def _init_(args) -> None:<CR><Tab><Tab>
+
 " LISP
-autocmd FileType lisp,clisp inoremap <CR>   <CR>()<Esc>1hli
-autocmd FileType lisp,clisp inoremap '      '()<Esc>1hli
-autocmd FileType lisp,clisp inoremap ;      ;;
+autocmd FileType lisp,clisp inoremap	<CR>   <CR>()<Esc>1hli
+autocmd FileType lisp,clisp inoremap	'      '()<Esc>1hli
+autocmd FileType lisp,clisp inoremap	;      ;;
 

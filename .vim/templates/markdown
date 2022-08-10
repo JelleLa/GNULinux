@@ -1,7 +1,14 @@
 ---
-title: TITLE
-author: AUTHOR
-date:  \today
+title:
+- TITLE
+author:
+- AUTHOR
+date:
+- \today
+theme:
+- Boadilla
+colortheme:
+- rose
 ---
 
-# SECTION/SLIDE 
+# SECTION/SLIDE

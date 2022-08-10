@@ -1,33 +1,19 @@
-#!/bin/bash
+#! bin/bash
+#$f1 $f2●●●● $f3●●●● $f4●●●● $f5●●●● $f6●●●●
+# VARIABLES
+block=██
+n_blocks=8
+n_space=1
 
-# ANSI color scheme script by pfh
-# Source: http://crunchbang.org/forums/viewtopic.php?pid=139126#p139126
-# Initializing mod by lolilolicon from Archlinux
-#
-f=3
-b=4
 
-echo ---------------------------------------------------------
-echo Welcome $(whoami)! It is $(date +%a) $(date +%x)
-echo The weather in $(curl --silent wttr.in/Eindhoven?format=4)
-
-for j in f b; do
-  for i in {0..7}; do
-    printf -v $j$i %b "\e[${!j}${i}m"
-  done
+printf "\n ➜ $(whoami)\n ➜ $(uname -o) $(uname -r)\n ➜ $(curl --silent wttr.in/?format="%c%t+(%l)\n")"
+echo ""
+for i in $(seq $n_space); do
+    echo ""
 done
-for i in {0..7}; do
-    printf -v fbright$i %b "\e[9${i}m"
+for i in $(seq $n_blocks); do
+    printf '\e[1;3%sm %s \e[0m ' "$i" "$block"
 done
-bld=$'\e[1m'
-rst=$'\e[0m'
-inv=$'\e[7m'
-
-cat << EOF
-
- $f1█████ $f2█████ $f3█████ $f4█████ $f5█████ $f6█████
- $bld$fbright1█████ $fbright2█████ $fbright3█████ $fbright4█████ $fbright5█████ $fbright6█████
- $rst
-EOF
-echo ---------------------------------------------------------
+printf "\n"
+echo ""
 
