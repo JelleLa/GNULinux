@@ -15,6 +15,9 @@ syntax on
 scriptencoding utf-8
 set encoding=utf-8
 
+" KEEP INDENTS
+set smartindent
+
 " NO LINE BREAKS IN WORDS
 set linebreak
 
@@ -86,7 +89,7 @@ set lcs+=eol:¶
 " -| COMMANDS |-
 
 " TEMPLATES
-command LoadTex		:0r $HOME/.vim/templates/latex
+command LoadTex		:0r $HOME/.vim/templates/latex.tex
 command LoadPython	:0r $HOME/.vim/templates/python
 command LoadBash	:0r $HOME/.vim/templates/bash
 command LoadLISP	:0r $HOME/.vim/templates/lisp
@@ -101,7 +104,7 @@ command CompLuaTex2Pdf	!clear && lualatex % && zathura %:r.pdf
 command CompMd2Pdf		!clear && pandoc -s % -o %:r.pdf && zathura %:r.pdf
 command CompMd2Beamer	!clear && pandoc -t beamer % -o %:r.pdf && zathura %:r.pdf
 
-" COMPILING (OLD, LEFT IN AS FALLBACK)
+" COMPILING (NEW, BUT WIP)
 command Compile		!clear && $HOME/.vim/scripts/compile.sh %
 
 " CONVERT
@@ -139,12 +142,12 @@ autocmd FileType html inoremap <   <> </><Esc>4hli
 
 " LATEX
 autocmd FileType tex,latex inoremap <C-b>   \textbf{}<Esc>hli
-autocmd FileType tex,latex inoremap <C-i>   \textit{}<Esc>hli
+" autocmd FileType tex,latex inoremap <C-i>   \textit{}<Esc>hli
 autocmd filetype tex,latex inoremap <C-t>   \texttt{}<esc>hli
 autocmd filetype tex,latex inoremap ;ch     \chapter{}<CR>\label{ch:}<esc>k2li
-autocmd filetype tex,latex inoremap ;sec    \section{}<CR>\label{s:}<esc>k2li
-autocmd filetype tex,latex inoremap ;ssec   \subsection{}<CR>\label{ss:}<esc>k2li
-autocmd filetype tex,latex inoremap ;sssec  \subsubsection{}<CR>\label{sss:}<esc>k2li
+autocmd filetype tex,latex inoremap ;s1    \section{}<CR>\label{s:}<esc>k2li
+autocmd filetype tex,latex inoremap ;s2   \subsection{}<CR>\label{ss:}<esc>k2li
+autocmd filetype tex,latex inoremap ;s3  \subsubsection{}<CR>\label{sss:}<esc>k2li
 autocmd FileType tex,latex inoremap ;eq     \begin{equation}<CR><CR>\label{eq:}<CR>\tag{}<CR>\end{equation}<Esc>3ki<Tab>
 autocmd FileType tex,latex inoremap ;it     \begin{itemize}<CR><Tab>\item<CR>\end{itemize}<Esc>kA<Space>
 autocmd FileType tex,latex inoremap ;cit    \begin{compactitem}<CR><Tab>\item<CR>\end{compactitem}<Esc>kA<Space>
@@ -176,4 +179,3 @@ autocmd FileType python inoremap	;class class cl(args) -> None:<CR><Tab>def _ini
 autocmd FileType lisp,clisp inoremap	<CR>   <CR>()<Esc>1hli
 autocmd FileType lisp,clisp inoremap	'      '()<Esc>1hli
 autocmd FileType lisp,clisp inoremap	;      ;;
-
