@@ -21,6 +21,13 @@ DIR="$(dirname $FILEDIR)"
 TYPE="${FILE##*.}"
 NAME="${FILE%.*}"
 
+# ZATHURA FUNCTION ===============
+function pdfrender (){
+	NAME_LOC="$1"
+	echo $NAME_LOC
+	zathura --synctex-forward :: ${NAME_LOC} 2> /dev/null &
+}
+
 # PROCEDURE=======================
 printf "Give method of compilation\n"\
 "-> doc Compiles Markdown to a .pdf document\n"\
@@ -28,25 +35,30 @@ printf "Give method of compilation\n"\
 "-> pdf Compiles LaTeX to a .pdf document using pdflatex\n"\
 "-> lua Compiles LaTeX to a .pdf document using lualatex\n"
 
-read METHOD
+if [ -z $COMPILATION_METHOD ];then
+	printf "Method: "
+	read METHOD
+	export COMPILATION_METHOD="$METHOD"
+fi
+
 if [ -n $TYPE ];then
 	case $TYPE in
 		md)
 		if [ -z $METHOD ];then
-			pandoc -s ${FILEDIR} -o ${NAME}.pdf && zathura --synctex-forward :: ${NAME}.pdf 2> /dev/null &
+			pandoc -s ${FILEDIR} -o ${NAME}.pdf && pdfrender ${NAME}
 		else
 			case $METHOD in
-				doc) pandoc -s ${FILEDIR} -o ${NAME}.pdf && zathura ${NAME}.pdf;;
-				beamer) pandoc -t beamer ${FILEDIR} -o ${NAME}.pdf && zathura ${NAME}.pdf;;
+				doc) pandoc -s ${FILEDIR} -o ${NAME}.pdf && pdfrender ${NAME}.pdf;;
+				beamer) pandoc -t beamer ${FILEDIR} -o ${NAME}.pdf && pdfrender ${NAME}.pdf;;
 			esac
 		fi;;
 		tex)
 		if [ -z $METHOD ];then
-			pdflatex ${FILEDIR} && zathura ${NAME}.pdf
+			lualatex ${FILEDIR} && pdfrender ${NAME}.pdf
 		else
 			case $METHOD in
-				pdf) pdflatex ${FILEDIR} && zathura ${NAME}.pdf;;
-				lua) lualatex ${FILEDIR} && zathura ${NAME}.pdf;;
+				pdf) pdflatex ${FILEDIR} && pdfrender ${NAME}.pdf;;
+				lua) lualatex ${FILEDIR} && pdfrender ${NAME}.pdf;;
 			esac
 		fi;;
 
@@ -54,5 +66,3 @@ if [ -n $TYPE ];then
 else
 	echo "'$1' is likely not a compilable file!"
 fi
-
-# ZATHURA FUNCTION ===============
