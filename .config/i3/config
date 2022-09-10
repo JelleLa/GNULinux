@@ -10,16 +10,16 @@ set $defaultmod Mod4
 set $super Mod4
 
 # Workspace variables
-set $ws1    "1:Ⅰ"
-set $ws2    "2:Ⅱ"
-set $ws3    "3:Ⅲ"
-set $ws4    "4:Ⅳ"
-set $ws5    "5:Ⅴ"
-set $ws6    "6:Ⅵ"
-set $ws7    "7:Ⅶ"
-set $ws8    "8:Ⅷ"
-set $ws9    "9:Ⅸ"
-set $ws10   "10:Ⅹ"
+set $ws1    "Ⅰ"
+set $ws2    "Ⅱ"
+set $ws3    "Ⅲ"
+set $ws4    "Ⅳ"
+set $ws5    "Ⅴ"
+set $ws6    "Ⅵ"
+set $ws7    "Ⅶ"
+set $ws8    "Ⅷ"
+set $ws9    "Ⅸ"
+set $ws10   "Ⅹ"
 
 # Color variables
 set $black      #000000
@@ -74,8 +74,8 @@ gaps outer 0
 # Applications
 bindsym $super+Return exec $term
 bindsym $super+Shift+s exec i3lock --color=$black
-#bindsym $super+s exec i3-dmenu-desktop
-bindsym $super+s exec dmenu_run -b -nb '$black' -sf '$black' -sb '$ws_bg' -nf '$white' -fn 'Firacode Bold 15'
+#bindsym $super+s exec dmenu_run -b -nb '$black' -sf '$black' -sb '$ws_bg' -nf '$white' -fn 'Firacode Bold 15'
+bindsym $super+s exec ~/.config/i3/launchrofi.sh
 bindsym $super+Control+Left workspace next
 bindsym $super+Control+Right workspace next
 
@@ -151,7 +151,7 @@ bindsym Mod4+Shift+c reload
 bindsym Mod4+Shift+r restart
 
 #----------------------------------------
-# -| MOUSE SETTINGS |-
+# -| MOUSE AND WINDOW SETTINGS |-
 
 # Enable Mouse Hover To Focus
 focus_follows_mouse yes
@@ -163,6 +163,9 @@ floating_modifier Mod4
 for_window [title="video0 - mpv"] floating enable
 for_window [title="video0 - mpv"] sticky enable
 
+# Webcam Window Settings
+for_window [title="Figure*"] floating enable
+
 #----------------------------------------
 # -| AUTOLAUNCH |-
 
@@ -172,12 +175,14 @@ exec_always picom --config ~/.config/picom/picom.conf
 exec_always picom
 exec $term -e sudo bash .bash/startup.sh
 exec_always --no-startup-id mpd
+exec /opt/xflux/xflux -l 51.441643 -g 5.469722 -k 3400
+exec tint2
 
 #----------------------------------------
 # -| I3BAR |-
 
 bar {
-    mode dock
+    mode invisible
     status_command i3status
     position top
     font pango: Firacode Bold 10

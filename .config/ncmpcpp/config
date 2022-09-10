@@ -1,0 +1,132 @@
+#==============================================================================
+#
+#	███╗   ██╗ ██████╗███╗   ███╗██████╗  ██████╗██████╗ ██████╗      ██████╗ ██████╗ ███╗   ██╗███████╗██╗ ██████╗
+#	████╗  ██║██╔════╝████╗ ████║██╔══██╗██╔════╝██╔══██╗██╔══██╗    ██╔════╝██╔═══██╗████╗  ██║██╔════╝██║██╔════╝
+#	██╔██╗ ██║██║     ██╔████╔██║██████╔╝██║     ██████╔╝██████╔╝    ██║     ██║   ██║██╔██╗ ██║█████╗  ██║██║  ███╗
+#	██║╚██╗██║██║     ██║╚██╔╝██║██╔═══╝ ██║     ██╔═══╝ ██╔═══╝     ██║     ██║   ██║██║╚██╗██║██╔══╝  ██║██║   ██║
+#	██║ ╚████║╚██████╗██║ ╚═╝ ██║██║     ╚██████╗██║     ██║         ╚██████╗╚██████╔╝██║ ╚████║██║     ██║╚██████╔╝
+#	╚═╝  ╚═══╝ ╚═════╝╚═╝     ╚═╝╚═╝      ╚═════╝╚═╝     ╚═╝          ╚═════╝ ╚═════╝ ╚═╝  ╚═══╝╚═╝     ╚═╝ ╚═════╝
+#
+#==============================================================================
+## ~~ FILES ~~
+#==============================================================================
+
+mpd_music_dir = "~/Music"
+lyrics_directory  = ~/.ncmpcpp/lyrics
+ncmpcpp_directory  = ~/.ncmpcpp
+mpd_host = "localhost"
+mpd_port = "6600"
+mpd_connection_timeout = "5"
+mpd_crossfade_time = "5"
+
+#==============================================================================
+## ~~ VISUALISER SETTINGS ~~
+#==============================================================================
+
+visualizer_fifo_path = /tmp/mpd.fifo
+visualizer_output_name = mpd_fifo
+visualizer_in_stereo = yes
+visualizer_type = "spectrum"
+visualizer_look = ▀▋
+visualizer_color = blue, cyan, green, yellow, magenta, red, black
+#visualizer_color = 41, 83, 119, 155, 185, 215, 209, 203, 197, 161
+clock_display_seconds = yes
+
+#==============================================================================
+## ~~ SONG SETTINGS ~~
+#==============================================================================
+
+song_list_format = {%a - }{%t}|{$8%f$9}$R{$3(%l)$9}
+song_status_format = {{%a{ "%b"{ (%y)}} - }{%t}}|{%f}
+song_library_format = {%n - }{%t}|{%f}
+song_window_title_format = {%a - }{%t}|{%f}
+song_columns_list_format = (20)[]{a} (6f)[green]{NE} (50)[white]{t|f:Title} (20)[cyan]{b} (7f)[magenta]{l}
+
+#==============================================================================
+## ~~ PLAYLIST SETTINGS ~~
+#==============================================================================
+
+playlist_disable_highlight_delay = 5
+playlist_show_mpd_host = no
+playlist_show_remaining_time = no
+playlist_shorten_total_times = no
+playlist_separate_albums = no
+playlist_display_mode = classic
+playlist_editor_display_mode = classic
+
+#==============================================================================
+## ~~ DISPLAY & APPEARANCE SETTINGS ~~
+#==============================================================================
+
+system_encoding = "UTF-8"
+progressbar_look = "▃▃▃"i
+progressbar_elapsed_color = green
+colors_enabled = yes
+display_volume_level = no
+display_bitrate = yes
+display_remaining_time = yes
+header_visibility = yes
+statusbar_visibility = yes
+titles_visibility = yes
+header_text_scrolling = yes
+cyclic_scrolling = yes
+lines_scrolled = 1
+
+alternative_header_first_line_format = $b$1$aqqu$/a$9 {%t}|{%f} $1$atqq$/a$9$/b
+alternative_header_second_line_format = {{$4$b%a$/b$9}{ - $7%b$9}{ ($4%y$9)}}|{%D}
+now_playing_prefix = $b
+now_playing_suffix = $/b
+
+#==============================================================================
+## ~~ LYRICS SETTINGS ~~
+#==============================================================================
+
+message_delay_time = 5
+
+
+fetch_lyrics_for_current_song_in_background = no
+store_lyrics_in_song_dir = no
+
+#==============================================================================
+## ~~ STARTUP SETTINGS ~~
+#==============================================================================
+
+startup_screen = playlist
+startup_slave_screen = "visualizer"
+startup_slave_screen_focus = no
+
+#==============================================================================
+## ~~ MISC SETTINGS ~~
+#==============================================================================
+
+ignore_leading_the = no
+mouse_support = no
+enable_window_title = yes
+external_editor = vim
+use_console_editor = yes
+
+browser_sort_mode = name
+browser_sort_format = {%a - }{%t}|{%f} {(%l)}
+
+browser_display_mode = classic
+search_engine_display_mode = classic
+
+incremental_seeking = yes
+seek_time = 1
+volume_change_step = 1
+autocenter_mode = yes
+centered_cursor = yes
+
+default_place_to_search_in = database
+user_interface = alternative
+media_library_primary_tag = album_artist
+default_find_mode = wrapped
+
+follow_now_playing_lyrics = yes
+
+allow_for_physical_item_deletion = no
+screen_switcher_mode = browser, media_library, visualizer
+
+locked_screen_width_part = 50
+jump_to_now_playing_song_at_start = yes
+ask_before_clearing_playlists = yes

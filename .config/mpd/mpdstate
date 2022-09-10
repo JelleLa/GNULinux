@@ -1,0 +1,23 @@
+sw_volume: 96
+audio_device_state:1:pulse audio
+audio_device_state:1:mpd_fifo
+state: stop
+current: 3
+random: 1
+repeat: 0
+single: 0
+consume: 0
+crossfade: 15
+mixrampdb: 0.000000
+mixrampdelay: -1.000000
+playlist_begin
+0:Dire Straits - Communique (1979)/01-dire_straits-once_upon_a_time_in_the_west.flac
+1:Dire Straits - Communique (1979)/02-dire_straits-news.flac
+2:Dire Straits - Communique (1979)/03-dire_straits-where_do_you_think_youre_going.flac
+3:Dire Straits - Communique (1979)/04-dire_straits-communique.flac
+4:Dire Straits - Communique (1979)/05-dire_straits-ladywriter.flac
+5:Dire Straits - Communique (1979)/06-dire_straits-angel_of_mercy.flac
+6:Dire Straits - Communique (1979)/07-dire_straits-portobello_belle.flac
+7:Dire Straits - Communique (1979)/08-dire_straits-single-handed_sailor.flac
+8:Dire Straits - Communique (1979)/09-dire_straits-follow_me_home.flac
+playlist_end
