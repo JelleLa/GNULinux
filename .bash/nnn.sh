@@ -13,7 +13,9 @@ alias n3plug='curl -Ls https://raw.githubusercontent.com/jarun/nnn/master/plugin
 export NNN_PLUG='w:wallpaper;p:preview-tui;q:cdonquit'
 export NNN_OPENER=zathura
 export NNN_FIFO="/tmp/nnn.fifo"
-export NNN_BMS="s:$HOME/Documents/Siemens/;w:$HOME/GitHub/Website/"
+export NNN_BMS="s:$HOME/Documents/Siemens/
+				;w:$HOME/GitHub/Website/
+				;c:$HOME/.config"
 export nnn="$1"
 #----------------------------------------
 # -| MISC |-

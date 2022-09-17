@@ -73,7 +73,7 @@ gaps outer 0
 
 # Applications
 bindsym $super+Return exec $term
-bindsym $super+Shift+s exec i3lock --color=$black
+bindsym $super+Shift+s exec ~/.config/i3/locker.sh
 #bindsym $super+s exec dmenu_run -b -nb '$black' -sf '$black' -sb '$ws_bg' -nf '$white' -fn 'Firacode Bold 15'
 bindsym $super+s exec ~/.config/i3/launchrofi.sh
 bindsym $super+Control+Left workspace next
