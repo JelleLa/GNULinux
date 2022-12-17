@@ -127,7 +127,7 @@ esac
 dialog --title "openSUSE Setup Script" --yesno "Install and Setup Jupyter?" 10 40
 
 case "$?" in
-    0)  sudo pip3 install jupyter jupyter themes && jt -t monokai ;;
+    0)  sudo pip3 install jupyter jupyter themes && jt -t oceans16 -f fira -fs 12 -cellw 100% ;;
     1)  ;;
 esac
 ## END DIALOG
