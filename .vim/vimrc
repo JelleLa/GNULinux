@@ -1,181 +1,160 @@
-"========================================
-" <> vimrc <>
-"========================================
-"----------------------------------------
-" -| BASIC SETTINGS |-
-
-
-" LINE NUMBERS
-set number relativenumber
-
-" SYNTAX
-syntax on
-
-" ENCODING SETTINGS
-scriptencoding utf-8
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"░▒█░░▒█░▀█▀░▒█▀▄▀█░▒█▀▀▄░▒█▀▀▄
+"░░▒█▒█░░▒█░░▒█▒█▒█░▒█▄▄▀░▒█░░░
+"░░░▀▄▀░░▄█▄░▒█░░▒█░▒█░▒█░▒█▄▄▀
+"	AUTHOR: J. Langedijk
+"	DESCRIPTION: .vimrc file
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"SYNTAX AND ENCODING
+set number relativenumber	"Relative line numbers
+syntax on					"Syntax
+scriptencoding utf-8		"Encoding
 set encoding=utf-8
 
-" KEEP INDENTS
-set smartindent
+"FORMATTING
+set smartindent						"Set smart indenting
+set linebreak						"Set line breaks
+set textwidth=80					"Set textwidth to 80c
+set colorcolumn=80					"Draw column 80
+set tabstop=4						"<TAB> size
+set shiftwidth=4					"< > > size
+autocmd BufWritePre * %s/\s\+$//e	"Delete trailing whitespace
 
-" NO LINE BREAKS IN WORDS
-set linebreak
+"SYSTEM LEVEL THINGS
+set nobackup				"No "swp" backup files
+set title					"Set terminal title
 
-" CURSOR ALWAYS VISIBLE
-set ruler
+"CLIPBOARD
+nnoremap <C-y> "+y
+nnoremap <C-d> "+d
+nnoremap <C-p> "+P
+set clipboard=unnamedplus	"Default clipboard
 
-" STATUS BAR
-set laststatus=2
+"FIND
+set wildmenu				"Command line completion
+set path+=**				"Fuzzy search
 
-" CLIPBOARD
-set clipboard=unnamedplus
+"SHORTCUTS
+nnoremap ; :
+inoremap [ []<Esc>1hli
+inoremap ( ()<Esc>1hli
+inoremap { {}<Esc>1hli
+autocmd FileType html
+	\ inoremap <   <> </><Esc>4hli
 
-"----------------------------------------
-" -| ADVANCED SETTINGS |-
-
-" COMMAND-LINE COMPLETION
-set wildmenu
-
-" UNDO LIMIT
-set history=1000
-
-" EXIT CONFIRM DIALOG (INSTEAD OF FAILING A COMMAND)
-set confirm
-
-" DISABLE Vi COMPATIBILITY
-set nocompatible
-
-" DISABLE BACKUP FILES GENERATION (~ - files)
-set nobackup
-
-" SET WINDOW TITLE
-set title
-
-" SHOW EXISTING TAB WITH 4 SPACES WIDTH
-set tabstop=4
-
-" WHEN INDENTING WITH '>', USE 4 SPACES WIDTH
-set shiftwidth=4
-
-" SET CURSOR INDICATOR
-" set	cursorcolumn
-" set	cursorline
-
-
-" FUZZY FIND (ADD ** TO SEARCH PATH)
-set path+=**
-
-" AUTODELETE TRAILING WHITESPACE
-autocmd BufWritePre * %s/\s\+$//e
-
-"----------------------------------------
-" -| LOOK AND FEEL |-
-
-" SET THEME
-color abstract
-
-" WHITE LINE NUMBERS (CAN BE OVERWRITTEN BY ':colorscheme')
-highlight LineNr ctermfg=white cterm=ITALIC
-highlight CursorLineNr ctermfg=white cterm=BOLD
-
-"TAB/SPACE INDICATION
+"UI/UX
+color abstract							"Color sheme
+set confirm								"Confirmation message
+set nocompatible						"Not BW compatible with vi/ed
+nnoremap <S-q> :q!<CR>
+nnoremap <Tab> :tabnext<CR>
+nnoremap <C-t> :Texplore <CR>
+highlight LineNr
+	\ ctermfg=white cterm=ITALIC		"Line numbers in italc
+highlight CursorLineNr
+	\ ctermfg=white cterm=BOLD			"Current line number in bold
 noremap <space><space> :set invlist<CR>
+
+"TAB/SPACE VISUALISER MODE
 hi SpecialKey ctermfg=Red ctermbg=NONE
 set lcs+=space:·
 set lcs+=tab:››
 set lcs+=eol:¶
 
-"----------------------------------------
-" -| COMMANDS |-
+"NETrw SETTINGS
+let g:netrw_keepdir = 0							"Sync directories
+let g:netrw_banner = 0							"Hide banner
+let g:netrw_list_hide = '\(^\|\s\s\)\zs\.\S\+'	"Hide dotfiles
 
-" TEMPLATES
-command LoadTex		:0r $HOME/.vim/templates/latex.tex
-command LoadPython	:0r $HOME/.vim/templates/python
-command LoadBash	:0r $HOME/.vim/templates/bash
-command LoadLISP	:0r $HOME/.vim/templates/lisp
+"STORAGE MANAGMENT
+set history=1000	"Undo limit
 
-" INSERT
-command InrtBlock		:0r $HOME/.vim/templates/md_block
-command InrtAlertBlock	:0r $HOME/.vim/templates/md_alertblock
+"SPLITS NAVIGATION
+noremap <silent> <C-Up> :wincmd k<CR>
+noremap <silent> <C-Down> :wincmd j<CR>
+noremap <silent> <C-Left> :wincmd h<CR>
+noremap <silent> <C-Right> :wincmd l<CR>
 
-" COMPILING (OLD, LEFT IN AS FALLBACK)
-command CompTex2Pdf		!clear && pdflatex % && zathura %:r.pdf
-command CompLuaTex2Pdf	!clear && lualatex % && zathura %:r.pdf
-command CompMd2Pdf		!clear && pandoc -s % -o %:r.pdf && zathura %:r.pdf
-command CompMd2Beamer	!clear && pandoc -t beamer % -o %:r.pdf && zathura %:r.pdf
+"TEMPLATES
+command LoadTex		:0r
+	\ $HOME/.vim/templates/latex.tex	"Read LaTeX Template
+command LoadPython	:0r
+	\ $HOME/.vim/templates/python		"Read Python Template
+command LoadBash	:0r
+	\ $HOME/.vim/templates/bash			"Read bash Template
+command LoadLISP	:0r
+	\ $HOME/.vim/templates/lisp			"Read LISP Template
 
-" COMPILING (NEW, BUT WIP)
-command Compile		!clear && $HOME/.vim/scripts/compile.sh %
+"COMPILING
+command CompTex2Pdf		!clear &&
+	\ pdflatex % && zathura %:r.pdf						"TeX to PDF
+command CompLuaTex2Pdf	!clear &&
+	\ lualatex % && zathura %:r.pdf						"LuaTeX to PDF
+command CompMd2Pdf		!clear &&
+	\ pandoc -s % -o %:r.pdf && zathura %:r.pdf			"MD to PDF
+command CompMd2Beamer	!clear &&
+	\ pandoc -t beamer % -o %:r.pdf && zathura %:r.pdf	"MD to TeX Beamer
+command Compile		!clear &&
+	\ $HOME/.vim/scripts/compile.sh %
+command ConvTex2Md	!clear && pandoc -s % -o %:r.md		"Compile script
 
-" CONVERT
-command ConvTex2Md	!clear && pandoc -s % -o %:r.md
+"RUN
+command RunPython	!clear && python3 %		"Python
+command RunMATLAB	!matlab %				"MATLAB(R)
+command RunOctave	!octave %				"Octave
+command RunLISP		!sbcl --script %		"Common-LISP
 
-" RUNNING
-command RunPython	!clear && python3 %
-command RunMATLAB	!matlab %
-command RunOctave	!octave %
-command RunLISP		!sbcl --script %
 
-"----------------------------------------
-" -| KEYBINDINGS |-
-
-" GLOBAL YANKING, DELETING  AND PASTING
-nnoremap <C-y> "+y
-nnoremap <C-d> "+d
-nnoremap <C-p> "+P
-
-" TAB NAVIAGTION
-nnoremap <Tab> :tabnext<CR>
-nnoremap <C-t> :tabe $HOME/
-
-" SET ; TO :
-nnoremap ; :
-
-" SET Q TO :q!
-nnoremap <S-q> :q!<CR>
-
-" CLOSING OPEN BRACKETS
-inoremap [ []<Esc>1hli
-inoremap ( ()<Esc>1hli
-inoremap { {}<Esc>1hli
-autocmd FileType html inoremap <   <> </><Esc>4hli
-
-" LATEX
+"LATEX
 autocmd FileType tex,latex inoremap <C-b>   \textbf{}<Esc>hli
-" autocmd FileType tex,latex inoremap <C-i>   \textit{}<Esc>hli
+autocmd FileType tex,latex inoremap <C-i>   \textit{}<Esc>hli
 autocmd filetype tex,latex inoremap <C-t>   \texttt{}<esc>hli
 autocmd filetype tex,latex inoremap ;ch     \chapter{}<CR>\label{ch:}<esc>k2li
 autocmd filetype tex,latex inoremap ;s1    \section{}<CR>\label{s:}<esc>k2li
 autocmd filetype tex,latex inoremap ;s2   \subsection{}<CR>\label{ss:}<esc>k2li
-autocmd filetype tex,latex inoremap ;s3  \subsubsection{}<CR>\label{sss:}<esc>k2li
-autocmd FileType tex,latex inoremap ;eq     \begin{equation}<CR><CR>\label{eq:}<CR>\tag{}<CR>\end{equation}<Esc>3ki<Tab>
-autocmd FileType tex,latex inoremap ;it     \begin{itemize}<CR><Tab>\item<CR>\end{itemize}<Esc>kA<Space>
-autocmd FileType tex,latex inoremap ;cit    \begin{compactitem}<CR><Tab>\item<CR>\end{compactitem}<Esc>kA<Space>
-autocmd FileType tex,latex inoremap ;en     \begin{enumerate}<CR><Tab>\item<CR>\end{enumerate}<Esc>kA<Space>
-autocmd FileType tex,latex inoremap ;fig    <Esc>:r $HOME/.vim/templates/latexfigure<CR>2j/}<CR>i
-autocmd FileType tex,latex inoremap ;up     <Esc>:2r $HOME/.vim/templates/usepackage<CR>/%%END%%<CR>7xi
+autocmd filetype tex,latex inoremap ;s3
+	\ \subsubsection{}<CR>\label{sss:}<esc>k2li
+autocmd FileType tex,latex inoremap ;eq
+	\ \begin{equation}<CR><CR>\label{eq:}<CR>\tag{}<CR>\end{equation}
+	\ <Esc>3ki<Tab>
+autocmd FileType tex,latex inoremap ;it
+	\ \begin{itemize}<CR><Tab>\item<CR>\end{itemize}<Esc>kA<Space>
+autocmd FileType tex,latex inoremap ;cit
+	\ \begin{compactitem}<CR><Tab>\item<CR>\end{compactitem}<Esc>kA<Space>
+autocmd FileType tex,latex inoremap ;en
+	\ \begin{enumerate}<CR><Tab>\item<CR>\end{enumerate}<Esc>kA<Space>
+autocmd FileType tex,latex inoremap ;fig
+	\ <Esc>:r $HOME/.vim/templates/latexfigure<CR>2j/}<CR>i
+autocmd FileType tex,latex inoremap ;up
+	\ <Esc>:2r $HOME/.vim/templates/usepackage<CR>/%%END%%<CR>7xi
 autocmd FileType tex,latex inoremap $       $$<Esc>1hli
 autocmd FileType tex,latex inoremap ;bg     \begin{}<CR>\end{}
 autocmd FileType tex,latex nnoremap <S-c>   <Esc>:CompTex2Pdf<CR>
-autocmd FileType tex,latex nnoremap <C-s>   <Esc>:setlocal spell spelllang=en_us<CR>
+autocmd FileType tex,latex nnoremap <C-s>
+	\ <Esc>:setlocal spell spelllang=en_us<CR>
 
-" MARKDOWN
+"MARKDOWN
 autocmd FileType md,markdown inoremap <C-b>		****<Esc>2hli
 autocmd filetype md,markdown inoremap <C-t>		``<esc>hli
 autocmd filetype md,markdown inoremap <C-s>		#<Space>
 autocmd FileType md,markdown inoremap ;l		[]()<Esc>3hli
 autocmd FileType md,markdown inoremap ;eq		$$<CR><CR>$$<Esc>ki<Tab>
-autocmd FileType md,markdown inoremap ;fig		![Caption\label{fig:figure}]()<Esc>1hli
+autocmd FileType md,markdown inoremap ;fig
+	\ ![Caption\label{fig:figure}]()<Esc>1hli
 autocmd FileType md,markdown inoremap $			$$<Esc>1hli
 autocmd FileType md,markdown nnoremap <S-c>		<Esc>:CompMd2Pdf<CR>
 autocmd FileType md,markdown nnoremap <S-b>		<Esc>:CompMd2Beamer<CR>
-autocmd FileType md,markdown nnoremap <C-s>		<Esc>:setlocal spell spelllang=en_us<CR>
+autocmd FileType md,markdown nnoremap <C-s>
+	\ <Esc>:setlocal spell spelllang=en_us<CR>
 
-" PYTHON
-autocmd FileType python inoremap	;def def method(args) -> None :<CR><Tab>
-autocmd FileType python inoremap	;class class cl(args) -> None:<CR><Tab>def _init_(args) -> None:<CR><Tab><Tab>
+"PYTHON
+autocmd FileType python inoremap	;def
+	\ def method(args) -> None :<CR><Tab>
+autocmd FileType python inoremap	;class
+	\ class cl(args) -> None:<CR><Tab>def _init_(args) -> None:<CR><Tab><Tab>
 
-" LISP
+"LISP
 autocmd FileType lisp,clisp inoremap	<CR>   <CR>()<Esc>1hli
 autocmd FileType lisp,clisp inoremap	'      '()<Esc>1hli
 autocmd FileType lisp,clisp inoremap	;      ;;

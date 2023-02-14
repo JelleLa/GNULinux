@@ -1,0 +1,92 @@
+%=====================================================================================
+% - Title: latex
+% - Author: Jelle Langedijk
+% - Filename: `latex.tex`
+% - Purpose: A complete, clear
+%	template for writing LaTeX
+%	files that is TeXlive-compliant.
+%=====================================================================================
+%% PREAMBLE --------------------------------------------------------------------------
+% --> Setting Document Class, Input and Language
+\documentclass[leqno]{article}			%`leqno` places equation tags to the left
+\usepackage[utf8]{inputenc}				%Unicode Support
+\usepackage[english]{babel}				%Language
+% --> Fonts
+\usepackage{kpfonts}					%Font, supported by TeXlive
+\usepackage[T1]{fontenc}				%Magic thing to get the font working
+% --> Column Handling
+\usepackage{multicol}					%Multi-Columns
+% --> TiKz Things
+\usepackage{tikz}						%TiKz
+\usepackage{pdfpages}					%PDF importer, at the wrong spot
+\usetikzlibrary{positioning}			%Positioning TiKz Library
+\usepackage{pgfplots}					%Plotting
+% --> Table Things
+\usepackage{tabularx}					%TabularX, to make more sexy tables
+\usepackage{booktabs}					%Booktabs in tables
+% --> AMSTeX Things
+\usepackage{amsmath}					%All the AMSMath things
+\usepackage{amssymb}					%Cute symbols
+% --> Graphics and Figures
+\usepackage{xcolor}						%Fancy colors
+\usepackage{geometry}				    %Page geometry settings
+\usepackage{graphicx}					%Graphics support
+\usepackage{float}						%Float support
+\usepackage{caption}					%For subcaptions in subfigures
+\usepackage{hologo}						%Fancy Logos
+% --> Referencing and `hyperref` Settings
+\usepackage{hyperref}					%For cross-referencing, links, forms and more
+\renewcommand\LayoutCheckField[2]{#1\hfill #2}
+% --> Listings and Code
+\usepackage{listings}					%Code Listings
+\lstdefinestyle{mystyle}{
+	backgroundcolor= {},
+	commentstyle=\color{codegreen},
+	keywordstyle=\color{magenta},
+	numberstyle=\tiny\color{codeblack},
+	stringstyle=\color{codepurple},
+	basicstyle=\ttfamily\footnotesize,
+	breakatwhitespace=false,
+	breaklines=true,
+	captionpos=b,
+	keepspaces=true,
+	numbers=left,
+	numbersep=5pt,
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=true,
+	tabsize=2,
+}
+\lstset{style=mystyle}					%Set `mystyle` as default listing style
+% --> Tcolorbox
+\usepackage{tcolorbox}					%Fancy Boxes around text, e.g. for code blocks
+\tcbuselibrary{skins,breakable}
+\newtcolorbox{simpleblock}[1]{
+	fonttitle=\bfseries,
+	title=#1,
+	size=normal,
+	bottom=0.1 mm,
+	sharp corners,
+	breakable
+}
+% --> Emoji Support (Needs Compilation via LuaLaTex!)
+\usepackage{emoji}						%Emoji Support
+\setemojifont{TwemojiMozilla}			%Use Mozilla Emojis
+% --> Miscallaneous
+\usepackage{lipsum}						%Generates Lorem Ipsums on demand
+\usepackage{paralist}
+\usepackage{soul}
+\usepackage{parskip}
+\usepackage{import}						%Import other .tex files for structure
+
+%% TITLE --------------------------------------------------------------------------
+\title{TITLE}
+\author{AUTHOR}
+\date{\today}
+
+%% MAIN --------------------------------------------------------------------------
+\begin{document}
+
+\maketitle
+
+\end{document}

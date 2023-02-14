@@ -1,15 +1,17 @@
 #! /bin/bash
-# THIS SCRIPT IS INCOMPLETE
-#=================================
+###############################################################################
+#░▒█▀▀▄░▒█▀▀▀█░▒█▀▄▀█░▒█▀▀█░▀█▀░▒█░░░░▒█▀▀▀░░░░▒█▀▀▀█░▒█░▒█
+#░▒█░░░░▒█░░▒█░▒█▒█▒█░▒█▄▄█░▒█░░▒█░░░░▒█▀▀▀░▄▄░░▀▀▀▄▄░▒█▀▀█
+#░▒█▄▄▀░▒█▄▄▄█░▒█░░▒█░▒█░░░░▄█▄░▒█▄▄█░▒█▄▄▄░▀▀░▒█▄▄▄█░▒█░▒█
 # - Title: Compile
 # - Author: Jelle Langedijk
 # - Filename: `compile.sh`
 # - Purpose: Compile any filetype.
 #	Based on arguments it "smartly"
 #	selects the compile procedure
-#=================================
-
-# VARS============================
+###############################################################################
+###############################################################################
+#VARIABLES
 FILEDIR=$1
 if [ -z $FILEDIR ];then
 	echo "No file given to compile!"
@@ -21,14 +23,14 @@ DIR="$(dirname $FILEDIR)"
 TYPE="${FILE##*.}"
 NAME="${FILE%.*}"
 
-# ZATHURA FUNCTION ===============
+#ZATHURA FUNCTION
 function pdfrender (){
 	NAME_LOC="$1"
 	echo $NAME_LOC
 	zathura --synctex-forward :: ${NAME_LOC} 2> /dev/null &
 }
 
-# PROCEDURE=======================
+#PROCEDURE
 printf "Give method of compilation\n"\
 "-> doc Compiles Markdown to a .pdf document\n"\
 "-> beamer Compiles Markdown to a .pdf beamer presentation\n"\
