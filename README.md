@@ -1,4 +1,4 @@
-> IMPORTANT NOTE (2023-03-04): This repository has been moved to [GitLab](https://gitlab.com/bleepbloop2/gnu-linux). This repository is from now on unmaintained.
+> IMPORTANT NOTE (2023-03-04): This repository has been moved to [GitLab](https://gitlab.com/bleepbloop2/gnu-linux). This repository is from now on unmaintained, look at the GitLab equivalent instead.
 
 # GNU+Linux dotfiles 🐧
 
